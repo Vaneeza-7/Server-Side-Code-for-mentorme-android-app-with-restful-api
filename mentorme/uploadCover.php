@@ -9,12 +9,12 @@ if(isset($_POST['image'], $_POST['email'], $_POST['localhost']))
     $email = $_POST['email'];
     $localhost = $_POST['localhost']; //in format http://192.168.56.9/
     $name = "image_" . $email . ".jpeg"; 
-    $path = "dpImages/$name";
+    $path = "coverImages/$name";
     
     if (file_put_contents($path, base64_decode($image))) {
         $fullPath = $localhost . "mentorme/$path"; 
         
-        $stmt = $conn->prepare("UPDATE `users` SET dp = ? WHERE email = ?");
+        $stmt = $conn->prepare("UPDATE `users` SET cp = ? WHERE email = ?");
         $stmt->bind_param("ss", $fullPath, $email);
         
         if ($stmt->execute()) {
